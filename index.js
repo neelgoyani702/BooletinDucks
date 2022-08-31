@@ -193,7 +193,7 @@ function displayNews() {
     var date = news.publishedAt.split("T");
 
     var col = document.createElement("div");
-    col.className = "col-sm-12 col-md-4 col-lg-3 p-2 card";
+    col.className = "col-sm-12 col-md-4 col-lg-3 m-2 p-2 card card-body";
 
     var card = document.createElement("div");
     card.className = "p-2";
@@ -201,7 +201,7 @@ function displayNews() {
     var image = document.createElement("img");
     image.setAttribute("height", "matchparent");
     image.setAttribute("width", "100%");
-    image.src = news.urlToImage;
+    image.src = news.urlToImage || "https://i-invdn-com.investing.com/news/world_news_2_69x52._800x533_L_1419494365.jpg";
 
     var cardBody = document.createElement("div");
 
