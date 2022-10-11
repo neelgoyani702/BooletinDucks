@@ -4,6 +4,12 @@ const businessBtn = document.getElementById("business");
 const sportsBtn = document.getElementById("sport");
 const entertainmentBtn = document.getElementById("entertainment");
 const technologyBtn = document.getElementById("technology");
+// harsh
+const stockBtn = document.getElementById("stock");
+const healthBtn = document.getElementById("health");
+const lifestyleBtn = document.getElementById("lifestyle");
+const shoppingBtn = document.getElementById("shopping");
+const BitcoinBtn = document.getElementById("Bitcoin");
 // const searchBtn = document.getElementById("searchBtn");
 
 // const newsQuery = document.getElementById("newsQuery");
@@ -29,34 +35,70 @@ const TECHNOLOGY_NEWS =
   "https://newsapi.org/v2/top-headlines?country=in&category=technology&pageSize=8&apiKey=";
 const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
 
+const BITCOIN_NEWS = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
+
+// This api is need to change for search it is not working************
+// const STOCK_NEWS =
+//   "https://newsapi.org/v2/everything?domains=wsj.com&pageSize=8&apiKey=";
+const HEALTH_NEWS =
+  "https://newsapi.org/v2/top-headlines?country=in&category=health&pageSize=8&apiKey=";
+// const LIFESTYLE_NEWS =
+//   "https://newsapi.org/v2/top-headlines?country=in&category=health&pageSize=8&apiKey=";
+// const SHOPPING_NEWS = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
+
 window.onload = function () {
-  newsType.innerHTML = "<h4>Headlines</h4>";
+  newsType.innerHTML = "<h4>Latest News</h4>";
   fetchHeadlines();
 };
 
 generalBtn.addEventListener("click", function () {
-  newsType.innerHTML = "<h4>General news</h4>";
+  newsType.innerHTML = "<h4>General News</h4>";
   fetchGeneralNews();
 });
 
 businessBtn.addEventListener("click", function () {
-  newsType.innerHTML = "<h4>Business</h4>";
+  newsType.innerHTML = "<h4>Business News</h4>";
   fetchBusinessNews();
 });
 
 sportsBtn.addEventListener("click", function () {
-  newsType.innerHTML = "<h4>Sports</h4>";
+  newsType.innerHTML = "<h4>Sports News</h4>";
   fetchSportsNews();
 });
 
 entertainmentBtn.addEventListener("click", function () {
-  newsType.innerHTML = "<h4>Entertainment</h4>";
+  newsType.innerHTML = "<h4>Entertainment News</h4>";
   fetchEntertainmentNews();
 });
 
 technologyBtn.addEventListener("click", function () {
-  newsType.innerHTML = "<h4>Technology</h4>";
+  newsType.innerHTML = "<h4>Technology News</h4>";
   fetchTechnologyNews();
+});
+
+stockBtn.addEventListener("click", function () {
+  newsType.innerHTML = "<h4>Stocks News</h4>";
+  fetchStockNews();
+});
+
+healthBtn.addEventListener("click", function () {
+  newsType.innerHTML = "<h4>Health News</h4>";
+  fetchHealthNews();
+});
+
+lifestyleBtn.addEventListener("click", function () {
+  newsType.innerHTML = "<h4>LifeStyle News</h4>";
+  fetchLifeStyleNews();
+});
+
+shoppingBtn.addEventListener("click", function () {
+  newsType.innerHTML = "<h4>Shopping News</h4>";
+  fetchShoppingNews();
+});
+
+BitcoinBtn.addEventListener("click", function () {
+  newsType.innerHTML = "<h4>Bitcoin News</h4>";
+  fetchBitcoinNews();
 });
 
 // searchBtn.addEventListener("click", function () {
@@ -161,6 +203,86 @@ const fetchTechnologyNews = async () => {
   displayNews();
 };
 
+const fetchStockNews = async () => {
+  const response = await fetch(STOCK_NEWS + API_KEY);
+  newsDataArr = [];
+  if (response.status >= 200 && response.status < 300) {
+    const myJson = await response.json();
+    newsDataArr = myJson.articles;
+  } else {
+    // handle errors
+    console.log(response.status, response.statusText);
+    newsdetails.innerHTML = "<h5>No data found.</h5>";
+    return;
+  }
+
+  displayNews();
+};
+
+const fetchHealthNews = async () => {
+  const response = await fetch(HEALTH_NEWS + API_KEY);
+  newsDataArr = [];
+  if (response.status >= 200 && response.status < 300) {
+    const myJson = await response.json();
+    newsDataArr = myJson.articles;
+  } else {
+    // handle errors
+    console.log(response.status, response.statusText);
+    newsdetails.innerHTML = "<h5>No data found.</h5>";
+    return;
+  }
+
+  displayNews();
+};
+
+const fetchLifeStyleNews = async () => {
+  const response = await fetch(LIFESTYLE_NEWS + API_KEY);
+  newsDataArr = [];
+  if (response.status >= 200 && response.status < 300) {
+    const myJson = await response.json();
+    newsDataArr = myJson.articles;
+  } else {
+    // handle errors
+    console.log(response.status, response.statusText);
+    newsdetails.innerHTML = "<h5>No data found.</h5>";
+    return;
+  }
+
+  displayNews();
+};
+
+const fetchShoppingNews = async () => {
+  const response = await fetch(SHOPPING_NEWS + API_KEY);
+  newsDataArr = [];
+  if (response.status >= 200 && response.status < 300) {
+    const myJson = await response.json();
+    newsDataArr = myJson.articles;
+  } else {
+    // handle errors
+    console.log(response.status, response.statusText);
+    newsdetails.innerHTML = "<h5>No data found.</h5>";
+    return;
+  }
+
+  displayNews();
+};
+
+const fetchBitcoinNews = async () => {
+  const response = await fetch(BITCOIN_NEWS + API_KEY);
+  newsDataArr = [];
+  if (response.status >= 200 && response.status < 300) {
+    const myJson = await response.json();
+    newsDataArr = myJson.articles;
+  } else {
+    // handle errors
+    console.log(response.status, response.statusText);
+    newsdetails.innerHTML = "<h5>No data found.</h5>";
+    return;
+  }
+
+  displayNews();
+};
+
 // const fetchQueryNews = async () => {
 //   if (newsQuery.value == null) return;
 
@@ -201,7 +323,9 @@ function displayNews() {
     var image = document.createElement("img");
     image.setAttribute("height", "matchparent");
     image.setAttribute("width", "100%");
-    image.src = news.urlToImage || "https://i-invdn-com.investing.com/news/world_news_2_69x52._800x533_L_1419494365.jpg";
+    image.src =
+      news.urlToImage ||
+      "https://i-invdn-com.investing.com/news/world_news_2_69x52._800x533_L_1419494365.jpg";
 
     var cardBody = document.createElement("div");
 
